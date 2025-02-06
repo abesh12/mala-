@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mala pokor tere liye</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background-color: #ffebf0;
+            overflow: hidden;
+        }
+        h1 {
+            margin-top: 50px;
+            font-size: 2em; /* Reduced font size */
+            color: #ff4d6d;
+        }
+        #question {
+            font-size: 1.3em; /* Reduced font size */
+            margin-top: 20px;
+            color: #333;
+        }
+        .buttons {
+            margin-top: 20px;
+        }
+        button {
+            font-size: 1.2em;
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            cursor: pointer;
+            border-radius: 10px;
+        }
+        #yes {
+            background-color: #28a745;
+            color: white;
+        }
+        #no {
+            background-color: #dc3545;
+            color: white;
+            position: absolute;
+        }
+        #message {
+            font-size: 1.2em; /* Reduced font size */
+            margin-top: 30px;
+            white-space: pre-line;
+            display: none;
+            color: #333;
+            text-align: center;
+            max-width: 90%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        @keyframes fall {
+            0% { transform: translateY(-100px); opacity: 1; }
+            100% { transform: translateY(100vh); opacity: 0; }
+        }
+        .falling-rose {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            animation: fall 5s linear infinite;
+        }
+        .typing-text {
+            display: inline-block;
+            white-space: pre-line;
+            overflow: hidden;
+            font-size: 1.2em; /* Reduced font size */
+            color: #333;
+            border-right: 2px solid black;
+            max-width: 90%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Will you be my Valentine? </h1>
+<p id="question">yes bolde gandu</p>
+
+<div class="buttons">
+    <button id="yes">yessir</button>
+    <button id="no">kya yaar</button>
+</div>
+
+<div id="message">
+    <span class="typing-text"></span>
+</div>
+
+<audio id="music" src="zzz.mp3"></audio>
+
+<script>
+    let noButton = document.getElementById("no");
+    let yesButton = document.getElementById("yes");
+    let messageDiv = document.getElementById("message");
+    let typingText = document.querySelector(".typing-text");
+    let music = document.getElementById("music");
+
+    let reasons = [
+        "bc",
+        "aisa mat kr",
+        "bhai kya harami h",
+        "heartless mf",
+        "bhaiiii",
+        "yes bolde yaar"
+    ];
+    let index = 0;
+
+    noButton.addEventListener("mouseover", function() {
+        noButton.style.top = Math.random() * window.innerHeight + "px";
+        noButton.style.left = Math.random() * window.innerWidth + "px";
+        noButton.innerText = reasons[index % reasons.length];
+        index++;
+    });
+
+    yesButton.addEventListener("click", function() {
+        document.getElementById("question").style.display = "none";
+        document.querySelector(".buttons").style.display = "none";
+        messageDiv.style.display = "block";
+        music.currentTime = 149; // Start from 2:29
+        music.play(); // Play the music only when Yes is clicked
+
+        let messageText = `Mala, happy valentines day and 1 month of no fights😂...
+
+I don’t really know how to express properly, but I would like to take this moment to cherish the moments I have created with you and to further create more in the future.
+
+Having you is my happiness and sorrow simultaneously😂, like yin and yang, but happiness is much more, so don’t be angry or upset. You deserve all the happiness, and I hope I can be half the man you root for, be the best support for you, in your ups and downs, always and forever.
+
+Idc how much dry you are, you will always be the pretty girl Mala whom I encountered in chicken pakore dukan😂. Thoda sa stress lena kam krdo and try to enjoy yaar. Anyways, I am really glad this Valentine I have the best one on my side, forever grateful🤍.
+
+~Abesh.`;
+
+        let i = 0;
+        function typeWriter() {
+            if (i < messageText.length) {
+                typingText.innerHTML += messageText.charAt(i);
+                i++;
+                setTimeout(typeWriter, 50);
+            } else {
+                typingText.style.borderRight = "none"; // Hide the blinking cursor after typing
+            }
+        }
+        typeWriter();
+    });
+
+    function createFallingRoses() {
+        for (let i = 0; i < 20; i++) {
+            let rose = document.createElement("img");
+            rose.src = "https://cdn-icons-png.flaticon.com/512/1014/1014671.png"; 
+            rose.className = "falling-rose";
+            rose.style.left = Math.random() * window.innerWidth + "px";
+            rose.style.animationDuration = (Math.random() * 3 + 2) + "s";
+            document.body.appendChild(rose);
+        }
+    }
+    createFallingRoses();
+</script>
+
+</body>
+</html>
